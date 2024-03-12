@@ -174,6 +174,10 @@
         const year = last.getFullYear();
         const month = last.getMonth() + 1;
         const date = last.getDate();
+        const hour = last.getHours(); // 時
+        const min = last.getMinutes(); // 分
+        const sec = last.getSeconds(); // 秒
+       
         /**
           * ステップ3
           * 「月・日」の値が1桁の場合は先頭に「0」を追加して2桁に修正
@@ -182,21 +186,20 @@
         let fixedMonth = month;
         let fixedDate = date;
         // 月の値が10より小さい場合は先頭に「0」を追加
-        if (month < 10) {
-        fixedMonth = "0" + month;
-        }
+        if (month < 10) {fixedMonth = "0" + month;}
         // 日の値が10より小さい場合は先頭に「0」を追加
-        if (date < 10) {
-        fixedDate = "0" + date;
-        }
-        /**
+        if (date < 10) {fixedDate = "0" + date;}
+        if(hour < 10) {fixedHour = "0" + hour; }
+        if(min < 10) {fixedMin = "0" + min; }
+        if(sec < 10) {fixedSec = "0" + sec; }
+    
           * ステップ4
           * 上書き用の日付のテキストを作成
           */
         // 表示用のテキストを作成 例: 2024年2月8日
-        const viewDateText = year + "年" + month + "月" + date + "日";
+        const viewDateText = year + "年" + month + "月" + date + "日" + hour + '時' + min + '分' + sec + '秒</b>';
         // データ用の文字列を作成 例: 2024-02-08
-        const datetimeText = year + "-" + fixedMonth + "-" + fixedDate;
+        const datetimeText = year + "-" + fixedMonth + "-" + fixedDate + "-" + fixedHour + "-" + fixedMin + "-" + fixedSec;
         /**
           * ステップ5
           * HTMLの要素に値を上書き
