@@ -22,7 +22,6 @@
     </style>
 </head>
 <body>
-    <p>更新日時: <time id="modified_date"></time></p>
     <h1>本船荷役状況</h1>
     <table border="1">
     <table>
@@ -160,56 +159,28 @@
         setTimeout(function () {
             location.reload();
         }, 10000); // 10秒ごとにページを自動更新
-        /**
-          * ステップ1
-          * ファイルの更新日を取得
-          */
-        // HTMLファイルの最終更新日を取得
-        const last = new Date(document.lastModified);
-        /**
-          * ステップ2
-          * 取得した日付データを「年・月・日」に分けて取得
-          */
-        // 取得した日付を「年・月・日」に分けて変数に格納する
-        const year = last.getFullYear();
-        const month = last.getMonth() + 1;
-        const date = last.getDate();
-        const hour = last.getHours(); // 時
-        const min = last.getMinutes(); // 分
-        const sec = last.getSeconds(); // 秒
-       
-        /**
-          * ステップ3
-          * 「月・日」の値が1桁の場合は先頭に「0」を追加して2桁に修正
-          */
-        // 月・日の値を修正した後に格納する変数を用意する
-        let fixedMonth = month;
-        let fixedDate = date;
-        let fixedHour = hour;
-        let fixedMin = min;
-        let fixedSec = sec;
-        // 月の値が10より小さい場合は先頭に「0」を追加
-        if (month < 10) {fixedMonth = "0" + month;}
-        // 日の値が10より小さい場合は先頭に「0」を追加
-        if (date < 10) {fixedDate = "0" + date;}
-      
-          * ステップ4
-          * 上書き用の日付のテキストを作成
-          */
-        // 表示用のテキストを作成 例: 2024年2月8日
-        const viewDateText = hour + '時' + min + '分' + sec + '秒</b>';
-        // データ用の文字列を作成 例: 2024-02-08
-        const datetimeText = year + "-" + fixedMonth + "-" + fixedDate;
-        /**
-          * ステップ5
-          * HTMLの要素に値を上書き
-          */
-        // 更新日の表示先のHTML要素「time」タグを取得
-        const target = document.getElementById('modified_date');
-        // timeタグの内容を上書きする 例: 2024年2月8日
-        target.textContent = viewDateText;
-        // timeタグのdatetime属性を追加する 例: 2024-02-08
-        target.setAttribute("datetime", datetimeText);
+
+        var lastup = new Date(document.lastModified);
+        
+        var year = lastup.getYear(); // 年
+        var month = lastup.getMonth() + 1; // 月
+        var day = lastup.getDate(); // 日
+        var hour = lastup.getHours(); // 時
+        var min = lastup.getMinutes(); // 分
+        var sec = lastup.getSeconds(); // 秒
+        
+        if(year < 2000) { year += 1900; }
+        
+        // 数値が1桁の場合、頭に0を付けて2桁で表示する指定
+        if(month < 10) { month = "0" + month; }
+        if(day < 10) { day = "0" + day; }
+        if(hour < 10) { hour = "0" + hour; }
+        if(min < 10) { min = "0" + min; }
+        if(sec < 10) { sec = "0" + sec; }
+        
+        // 表示開始
+        document.write('更新日時：<b>' + year + '年' + month + '月' + day + '日');
+        document.write(hour + '時' + min + '分' + sec + '秒</b>');
     </script>
 </body>
 </html>
